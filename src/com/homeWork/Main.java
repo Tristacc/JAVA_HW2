@@ -14,7 +14,6 @@ public class Main {
             double st1_e = in.nextDouble();
             double st1_s = in.nextDouble();
             double st1_m = in.nextDouble();
-            in.close();
             double st1_average = (st1_c + st1_e + st1_s + st1_m) / 4;
 
             if (st1_average < 60){ System.out.println("FAIL");}
@@ -22,11 +21,8 @@ public class Main {
 
             n=n-1;
         }
-
-
-
-        }
-
+        in.close();
     }
+}
 
 
