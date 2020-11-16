@@ -1,0 +1,78 @@
+package com.hw;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        int n = 0;
+        int round = 0;
+        int finalround = 0;
+        int res = 0;
+        String winner = new String();
+
+        // 獲取基本資料
+        Scanner info = new Scanner(System.in);
+        String heroName = info.nextLine();
+        int heroLife = info.nextInt();
+        info.nextLine(); //吃掉enter
+        String monsterName = info.nextLine();
+        int monsterLife = info.nextInt();
+        int heroHelp = info.nextInt();
+        //判斷幾回且偵測到-1停止獲取資料
+        while (n == 0) {
+            int heroAttact = info.nextInt();
+
+            if (heroAttact < 0) {
+                break;
+            }
+
+            int monsterAttact = info.nextInt();
+
+            round += 1; //每輸入一對就算一回
+
+            //去計算每回合攻擊狀況
+            heroLife -= monsterAttact;
+            monsterLife -= heroAttact;
+
+            //使用help
+            if(heroLife <= 0 && heroHelp > 0){
+                        heroLife += 100;
+                        heroHelp -= 1;
+            }
+
+            //找出分出勝負的回合
+            if(heroLife > 0 && monsterLife >0){
+                finalround += 1;
+            }
+
+            System.out.println(heroLife);
+            System.out.println(monsterLife);
+
+            //三種結果
+            if(heroLife <= 0 && heroHelp == 0){
+
+                        winner = monsterName;
+                        res = monsterLife;
+            }
+            else if(monsterLife <= 0){
+
+                        winner = heroName;
+                        res = heroLife;
+            }
+            else if(heroLife <= 0 && heroHelp == 0 && monsterLife <= 0){
+
+                        winner = heroName;
+                        res = 1;
+            }
+
+        }
+        info.close();
+        System.out.println(winner);
+        System.out.println(finalround+1);
+        System.out.println(res);
+
+    }
+
+
+}
